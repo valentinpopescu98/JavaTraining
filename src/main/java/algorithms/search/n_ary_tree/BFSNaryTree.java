@@ -11,7 +11,7 @@ public class BFSNaryTree {
             return 0;
         }
 
-        return Collections.max(
+        return node == null ? 0 : Collections.max(
                 node.children
                         .stream()
                         .map(naryTreeNode -> naryTreeNode.value)

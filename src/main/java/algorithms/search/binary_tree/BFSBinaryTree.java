@@ -4,11 +4,7 @@ import data_structures.BinaryTreeNode;
 
 public class BFSBinaryTree {
     static int height(BinaryTreeNode node) {
-        if (node == null) {
-            return 0;
-        }
-
-        return Math.max(height(node.left), height(node.right)) + 1;
+        return node == null ? 0 : Math.max(height(node.left), height(node.right)) + 1;
     }
 
     static void processLevel(BinaryTreeNode node, int l) {

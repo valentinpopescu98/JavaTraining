@@ -1,4 +1,4 @@
-package algorithms.sorting;
+package algorithms.sorting.array;
 
 public class MergeSort {
     static void merge(int[] arr, int l, int m, int r) {
@@ -34,12 +34,12 @@ public class MergeSort {
         }
     }
 
-    static void mergesort(int[] arr, int l, int r) {
+    static void mergeSort(int[] arr, int l, int r) {
         if (l < r) {
             int m = (r - l) / 2 + l;
 
-            mergesort(arr, l, m);
-            mergesort(arr, m + 1, r);
+            mergeSort(arr, l, m);
+            mergeSort(arr, m + 1, r);
             merge(arr, l, m, r);
         }
     }
@@ -47,7 +47,7 @@ public class MergeSort {
     public static void main(String[] args) {
         int[] arr = {7,4,8,1,2,8,7,4,2};
 
-        mergesort(arr, 0, arr.length - 1);
+        mergeSort(arr, 0, arr.length - 1);
 
         for (var x : arr) {
             System.out.print(x + " ");

@@ -1,4 +1,4 @@
-package algorithms.sorting;
+package algorithms.sorting.array;
 
 public class QuickSort {
     static int partition(int[] arr, int l, int r) {
@@ -19,19 +19,19 @@ public class QuickSort {
         return k;
     }
 
-    static void quicksort(int[] arr, int l, int r) {
+    static void quickSort(int[] arr, int l, int r) {
         if (l < r) {
             int pi = partition(arr, l, r);
 
-            quicksort(arr, l, pi - 1);
-            quicksort(arr, pi + 1, r);
+            quickSort(arr, l, pi - 1);
+            quickSort(arr, pi + 1, r);
         }
     }
 
     public static void main(String[] args) {
         int[] arr = {7,4,8,1,2,8,7,4,2};
 
-        quicksort(arr, 0, arr.length - 1);
+        quickSort(arr, 0, arr.length - 1);
 
         for (var x : arr) {
             System.out.print(x + " ");
