@@ -7,10 +7,6 @@ import java.util.stream.Collectors;
 
 public class BFSNaryTree {
     static int height(NaryTreeNode node) {
-        if (node == null) {
-            return 0;
-        }
-
         return node == null ? 0 : Collections.max(
                 node.children
                         .stream()
