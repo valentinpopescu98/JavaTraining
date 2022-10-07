@@ -2,37 +2,20 @@ package algorithms.search.n_ary_tree;
 
 import data_structures.NaryTreeNode;
 
-import java.util.Collections;
-import java.util.stream.Collectors;
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 public class BFSNaryTree {
-    static int height(NaryTreeNode node) {
-        return node == null ? 0 : Collections.max(
-                node.children
-                        .stream()
-                        .map(naryTreeNode -> naryTreeNode.value)
-                        .collect(Collectors.toList())
-        );
-    }
-
-    static void processLevel(NaryTreeNode node, int l) {
-        if (node == null)
-            return;
-        if (l == 0) {
-            System.out.print(node.value + " ");
-        }
-        else if (l > 0) {
-            for (NaryTreeNode n : node.children) {
-                processLevel(n, l - 1);
-            }
-        }
-    }
-
     public static void printBFS(NaryTreeNode node) {
-        int h = height(node);
+        Queue<NaryTreeNode> queue = new ArrayDeque<>();
+        queue.add(node);
 
-        for (int l = 0; l < h; l++) {
-            processLevel(node, l);
+        while (!queue.isEmpty()) {
+            NaryTreeNode current = queue.poll();
+
+            System.out.print(current.value + " ");
+
+            queue.addAll(current.children);
         }
     }
 

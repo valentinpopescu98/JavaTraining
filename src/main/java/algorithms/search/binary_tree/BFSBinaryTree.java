@@ -2,28 +2,25 @@ package algorithms.search.binary_tree;
 
 import data_structures.BinaryTreeNode;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 public class BFSBinaryTree {
-    static int height(BinaryTreeNode node) {
-        return node == null ? 0 : Math.max(height(node.left), height(node.right)) + 1;
-    }
-
-    static void processLevel(BinaryTreeNode node, int l) {
-        if (node == null)
-            return;
-        if (l == 0) {
-            System.out.print(node.value + " ");
-        }
-        else if (l > 0) {
-            processLevel(node.left, l - 1);
-            processLevel(node.right, l - 1);
-        }
-    }
-
     public static void printBFS(BinaryTreeNode node) {
-        int h = height(node);
+        Queue<BinaryTreeNode> queue = new ArrayDeque<>();
+        queue.add(node);
 
-        for (int l = 0; l < h; l++) {
-            processLevel(node, l);
+        while (!queue.isEmpty()) {
+            BinaryTreeNode current = queue.poll();
+
+            System.out.print(current.value + " ");
+
+            if (current.left != null) {
+                queue.add(current.left);
+            }
+            if (current.right != null) {
+                queue.add(current.right);
+            }
         }
     }
 
