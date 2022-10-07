@@ -1,12 +1,14 @@
 package data_structures;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class GraphNode {
-    public int key;
-    public List<GraphNode> values;
+    public int value;
+    public boolean visited = false;
+    public List<GraphNode> neighbours = new LinkedList<>();
 
-    public GraphNode(int key) {
-        this.key = key;
+    public GraphNode(int value) {
+        this.value = value;
     }
 }

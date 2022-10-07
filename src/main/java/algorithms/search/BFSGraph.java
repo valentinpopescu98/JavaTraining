@@ -2,71 +2,24 @@ package algorithms.search;
 
 import data_structures.GraphNode;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Queue;
 
 public class BFSGraph {
-    static LinkedList<GraphNode> queue = new LinkedList<>();
-
-    static <T> boolean contains(LinkedList<T> list, T element) {
-        for (T value : list) {
-            if (value == element) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    static int height(GraphNode node) {
-        if (!queue.isEmpty() && queue.getFirst() == node) {
-            return 0;
-        }
-
-        Stack<Integer> heights = new Stack<>();
-        for (GraphNode value : node.values) {
-            if (!queue.isEmpty() && queue.getLast() == value) {
-                return 0;
-            }
-
-            queue.addLast(node);
-            heights.add(height(value));
-        }
-
-        Collections.sort(heights);
-
-        return heights.pop() + 1;
-    }
-
-    static void processLevel(GraphNode node, int l) {
-        if (l == 0) {
-            for (int i = 0; i < queue.size(); i++) {
-                if (node == queue.get(i)) {
-                    return;
-                }
-            }
-
-            if (!contains(queue, node)) {
-                queue.addLast(node);
-                System.out.print(node.key + " ");
-            }
-        }
-        else if (l > 0) {
-            for (GraphNode value : node.values) {
-                if (!queue.isEmpty() && queue.getLast() == value) {
-                    return;
-                }
-
-                processLevel(value, l - 1);
-            }
-        }
-    }
-
     public static void printBFS(GraphNode node) {
-        int h = height(node);
-        queue = new LinkedList<>();
+        Queue<GraphNode> queue = new ArrayDeque<>();
+        queue.add(node);
 
-        for (int l = 0; l < h; l++) {
-            processLevel(node, l);
+        while (!queue.isEmpty()) {
+            GraphNode current = queue.poll();
+
+            if (!current.visited) {
+                current.visited = true;
+                System.out.print(current.value + " ");
+
+                queue.addAll(current.neighbours);
+            }
         }
     }
 
@@ -76,10 +29,10 @@ public class BFSGraph {
         GraphNode node2 = new GraphNode(2);
         GraphNode node3 = new GraphNode(3);
 
-        node0.values = List.of(node1, node2);
-        node1.values = List.of(node2);
-        node2.values = List.of(node0, node3);
-        node3.values = List.of(node3);
+        node0.neighbours = Arrays.asList(node1, node2);
+        node1.neighbours = Arrays.asList(node2);
+        node2.neighbours = Arrays.asList(node0, node3);
+        node3.neighbours = Arrays.asList(node3);
 
         System.out.println("\noriginal.BFS ");
         printBFS(node2);

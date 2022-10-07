@@ -2,26 +2,25 @@ package algorithms.search;
 
 import data_structures.GraphNode;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Stack;
 
 public class DFSGraph {
-    static LinkedList<GraphNode> queue = new LinkedList<>();
-
     public static void printDFS(GraphNode node) {
-        if (!queue.isEmpty() && queue.getFirst() == node) {
-            return;
-        }
+        Stack<GraphNode> stack = new Stack<>();
+        stack.push(node);
 
-        queue.addLast(node);
-        System.out.print(node.key + " ");
+        while (!stack.isEmpty()) {
+            GraphNode current = stack.pop();
 
-        for (GraphNode value : node.values) {
-            if (!queue.isEmpty() && queue.getLast() == value) {
-                return;
+            if (!current.visited) {
+                current.visited = true;
+                System.out.print(current.value + " ");
+
+                Collections.reverse(current.neighbours);
+                current.neighbours.forEach(stack::push);
             }
-
-            printDFS(value);
         }
     }
 
@@ -31,10 +30,10 @@ public class DFSGraph {
         GraphNode node2 = new GraphNode(2);
         GraphNode node3 = new GraphNode(3);
 
-        node0.values = List.of(node1, node2);
-        node1.values = List.of(node2);
-        node2.values = List.of(node0, node3);
-        node3.values = List.of(node3);
+        node0.neighbours = Arrays.asList(node1, node2);
+        node1.neighbours = Arrays.asList(node2);
+        node2.neighbours = Arrays.asList(node0, node3);
+        node3.neighbours = Arrays.asList(node3);
 
         System.out.println("\noriginal.DFS ");
         printDFS(node2);
