@@ -2,9 +2,9 @@ package algorithms.sorting.array;
 
 public class QuickSort {
     static int partition(int[] arr, int l, int r) {
-        int k = 0;
+        int k = l;
 
-        for (int i = 0; i < r; i++) {
+        for (int i = l; i < r; i++) {
             if (arr[i] < arr[r]) {
                 int temp = arr[i];
                 arr[i] = arr[k];
