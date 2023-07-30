@@ -8,12 +8,8 @@ public class MergeSort {
         int[] lArr = new int[n1];
         int[] rArr = new int[n2];
 
-        for (int i = 0; i < n1; i++) {
-            lArr[i] = arr[l + i];
-        }
-        for (int i = 0; i < n2; i++) {
-            rArr[i] = arr[m + 1 + i];
-        }
+        System.arraycopy(arr, l, lArr, 0, n1);
+        System.arraycopy(arr, m + 1, rArr, 0, n2);
 
         int i = 0, j = 0, k = l;
 
